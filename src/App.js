@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route} from 'react-router-dom';
-import { StandardNavContainer } from './components/StandardNav.js';
+import StandardNav from './components/StandardNav.js';
 import Home from './components/Home';
 import { BasketContainer } from './components/Basket';
 import Products from './components/Products';
@@ -11,7 +11,7 @@ export default class App extends Component {
     return (
       <BrowserRouter>
         <div className="container my-4">
-          <StandardNavContainer />
+          <StandardNav />
           <div className="jumbotron my-2">
             <Route path="/" exact component={Home} />
             <Route path="/basket" component={BasketContainer}/>

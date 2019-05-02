@@ -67,10 +67,6 @@ const reducer = (state = initialState, action) => {
       updatedState.pizzaValues[buttonIdentifer]=state.productValues[buttonIdentifer];
       return updatedState;
 
-    case 'total':
-      updatedState.total= state.basket.map(elem => elem.price*elem.quantity);
-      return updatedState;
-
 
     case 'removePizza':
       const buttonDecIdentity = action.event.target.getAttribute('identity');
@@ -120,10 +116,6 @@ export const increment = ev => {
 
 export const addToOrder = ev => {
   return {type: 'addPizza', event: ev}
-}
-
-export const basketClick = ev => {
-  return {type: 'total', event: ev}
 }
 
 export const decrement= ev => {
