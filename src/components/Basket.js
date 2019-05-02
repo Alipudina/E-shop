@@ -24,7 +24,7 @@ class Basket extends Component {
           return (
             <div className="container my-4 w-100" key={index}>
               <div className="d-flex justify-content-between w-55 border border-secondary mr-4">
-                <h5>You have ordered <b>{elem.quantity}</b> <u>{elem.product}</u> and it costs <b>{elem.quantity*elem.price}€</b></h5>
+                <h5>You have ordered <b>{elem.quantity}</b> <u>{elem.product}</u> and it costs <b>{(elem.quantity*elem.price).toFixed(2)}€</b></h5>
                 <button type="button" className="btn btn-danger" onClick={this.props.handelDelete} deletebutton={index}>Delete</button>
               </div>
               <hr className="h-10"/>
@@ -33,8 +33,9 @@ class Basket extends Component {
         })}
 
         <div className="container my-4">
-          <h5>Total price:<b>&nbsp;{this.props.totalPrice.reduce((a, b) => a+b, 0)}€</b></h5>
+          <h5>Total price:<b>&nbsp;{this.props.readyBasket.reduce((a, b) => a+b.quantity*b.price, 0).toFixed(2)}€</b></h5>
           <hr className="h-10"/>
+          {this.props.toBeCounted && <span></span>}
         </div>
 
 
@@ -56,7 +57,6 @@ const mapDispatchToProps= dispatch => {
 const mapStateToProps = state => {
   return {
     readyBasket: state.basket,
-    totalPrice: state.total,
     orderSubmitted: state.orderSubmitted,
     emptyBasket: state.emptyBasket
   };

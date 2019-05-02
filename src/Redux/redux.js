@@ -6,7 +6,8 @@ const initialState = {
   basket: [],
   total: [],
   orderSubmitted: false,
-  emptyBasket: false
+  emptyBasket: false,
+  toCount: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -74,7 +75,6 @@ const reducer = (state = initialState, action) => {
     case 'removePizza':
       const buttonDecIdentity = action.event.target.getAttribute('identity');
       updatedState.pizzaValues[buttonDecIdentity] <1 ? updatedState.pizzaValues[buttonDecIdentity]=0 : updatedState.pizzaValues[buttonDecIdentity]=state.pizzaValues[buttonDecIdentity] - 1;
-      console.log('work');
       return updatedState;
 
     case 'submit':
@@ -85,7 +85,7 @@ const reducer = (state = initialState, action) => {
               updatedState.orderSubmitted=state.orderSubmitted = false;
               updatedState.emptyBasket=false;
               updatedState.basket = [];
-              console.log(updatedState.emptyBasket);
+              // console.log(updatedState.emptyBasket);
 
           }, 5000)
         )
@@ -99,17 +99,10 @@ const reducer = (state = initialState, action) => {
 
     case 'delete':
       const deleteIndex= action.event.target.getAttribute('deletebutton');
-        const deletedPrice=(updatedState.basket[deleteIndex].price)*(updatedState.basket[deleteIndex].quantity);
-        updatedState.total=[...updatedState.total, -deletedPrice];
-        if (deleteIndex==0) {
-          console.log('ok');
-          updatedState.total=[];
-        }
-        updatedState.basket.splice(deleteIndex, 1)
 
-      const orders = Object.assign([], state.basket);
-      orders.splice(deleteIndex, 1);
-      updatedState.basket=orders;
+        const toDelete = Object.assign([], state.basket);
+        toDelete.splice(deleteIndex, 1);
+        updatedState.basket= toDelete;
       return updatedState;
 
     default:
